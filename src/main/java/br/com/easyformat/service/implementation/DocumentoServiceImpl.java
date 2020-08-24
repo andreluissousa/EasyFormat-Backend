@@ -61,7 +61,6 @@ public class DocumentoServiceImpl implements DocumentoService {
 
     private void atualizaDados(final Documento documento, final Documento novoDocumento) {
         novoDocumento.setNomeArquivo(documento.getNomeArquivo());
-        novoDocumento.setDiretorioDocumento(documento.getDiretorioDocumento());
         novoDocumento.setCapa(documento.getCapa());
         novoDocumento.setSecoes(documento.getSecoes());
     }

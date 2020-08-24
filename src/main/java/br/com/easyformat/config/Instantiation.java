@@ -135,7 +135,7 @@ public class Instantiation implements CommandLineRunner{
 
         secaoRepository.saveAll(Arrays.asList(secao3));
       
-        Documento documento = new Documento(null, "Easyfomat", "/home/documentos/easyformat", capa);
+        Documento documento = new Documento(null, "Easyfomat", capa);
 
         documento.getSecoes().addAll(Arrays.asList(secao1, secao2, secao3));
 

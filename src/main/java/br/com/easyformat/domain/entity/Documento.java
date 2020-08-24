@@ -17,16 +17,13 @@ public class Documento {
 
     private String nomeArquivo;
 
-    private String diretorioDocumento;
-
     private Capa capa;
 
     private List<Secao> secoes = new ArrayList<>();
 
-    public Documento(String id, String nomeArquivo, String diretorioDocumento, Capa capa) {
+    public Documento(String id, String nomeArquivo, Capa capa) {
         this.id = id;
         this.nomeArquivo = nomeArquivo;
-        this.diretorioDocumento = diretorioDocumento;
         this.capa = capa;
     }
 

@@ -16,6 +16,7 @@ import br.com.easyformat.rest.dto.AutorDTO;
 public class Autor extends Pessoa{
 
     @Id   
+    
     private String id;
    
     private List<Obra> obras = new ArrayList<>();

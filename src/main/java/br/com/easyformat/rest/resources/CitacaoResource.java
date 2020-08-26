@@ -2,6 +2,9 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +39,7 @@ public class CitacaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarCitacao(@RequestBody Citacao citacao){
+    public ResponseEntity<Void> salvarCitacao(@RequestBody @Valid Citacao citacao){
         citacaoService.salvarCitacao(citacao);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/{id}").buildAndExpand(citacao.getId()).toUri();
         return ResponseEntity.created(uri).build();

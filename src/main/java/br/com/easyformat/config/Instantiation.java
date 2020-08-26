@@ -21,6 +21,7 @@ import br.com.easyformat.domain.repository.InstituicaoRepository;
 import br.com.easyformat.domain.repository.ObraRepository;
 import br.com.easyformat.domain.repository.SecaoRepository;
 import br.com.easyformat.domain.repository.SubSecaoRepository;
+import br.com.easyformat.domain.repository.UsuarioRepository;
 
 @Configuration
 public class Instantiation implements CommandLineRunner{
@@ -52,6 +53,9 @@ public class Instantiation implements CommandLineRunner{
     @Autowired
     private SubSecaoRepository subSecaoRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     public void run(String... args) throws Exception{
 
        cursoRepository.deleteAll();
@@ -64,10 +68,13 @@ public class Instantiation implements CommandLineRunner{
         obraRepository.deleteAll();
         citacaoRepository.deleteAll();
         subSecaoRepository.deleteAll();
+        usuarioRepository.deleteAll();
+    
 
 
         //Esta Classe é responsável por carregar o banco de dados, inserindo usuario, autores, documento e obras.
 
+        /*
         
         Curso c1 = new Curso(null, "Análise e Desenvolvimento de Sistemas");
         Curso c2 = new Curso(null, "Banco de Dados");
@@ -141,6 +148,6 @@ public class Instantiation implements CommandLineRunner{
 
         documentoRepository.saveAll(Arrays.asList(documento));
      
-        
+        */       
     }
 }

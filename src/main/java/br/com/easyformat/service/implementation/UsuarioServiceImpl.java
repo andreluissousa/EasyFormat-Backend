@@ -1,5 +1,6 @@
 package br.com.easyformat.service.implementation;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,16 +44,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private void atualizaDados(Usuario novoUsuario, Usuario usuario) {
         novoUsuario.setNome(usuario.getNome());
-        novoUsuario.setSobreNome(usuario.getSobreNome());
+        novoUsuario.setSobrenome(usuario.getSobrenome());
         novoUsuario.setEmail(usuario.getEmail());
         novoUsuario.setSenha(usuario.getSenha());
         novoUsuario.setFormacao(usuario.getFormacao());
-        novoUsuario.setDataNascimento(usuario.getDataNascimento());
     }
 
     @Override
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
         return new Usuario(usuarioDTO);
+    }
+
+    @Override
+    public List<Usuario> buscarTodos() {
+        return usuarioRepository.findAll();
     }
 
    

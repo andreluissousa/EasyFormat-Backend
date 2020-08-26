@@ -1,6 +1,8 @@
 package br.com.easyformat.rest.resources;
 
 import java.net.URI;
+import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,12 @@ public class UsuarioResource {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping
+    public ResponseEntity<List<Usuario>> buscarTodos(){
+        List<Usuario> listaUsuarios = usuarioService.buscarTodos();
+        return ResponseEntity.ok().body(listaUsuarios);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable String id){
         Usuario usuario = usuarioService.buscarPorId(id);
@@ -30,7 +38,7 @@ public class UsuarioResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<Void> salvarUsuario(@RequestBody @Valid UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioService.fromDTO(usuarioDTO);
         usuario = usuarioService.salvarUsuario(usuario);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();

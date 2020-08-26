@@ -24,7 +24,7 @@ public class Autor extends Pessoa{
     public Autor(AutorDTO autorDTO){
         this.id = autorDTO.getId();
         this.setNome(autorDTO.getNome());
-        this.setSobreNome(autorDTO.getSobreNome());
+        this.setSobrenome(autorDTO.getSobrenome());
     }
 
 }

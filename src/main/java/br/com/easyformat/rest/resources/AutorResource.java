@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.Autor;
+import br.com.easyformat.rest.dto.AutorDTO;
 import br.com.easyformat.service.AutorService;
 
 @RestController
@@ -30,13 +31,14 @@ public class AutorResource {
    }
 
    @GetMapping("{id}")
-   public ResponseEntity<Autor> buscarPorId(@PathVariable String id){
+   public ResponseEntity<AutorDTO> buscarPorId(@PathVariable String id){
        Autor autor = autorService.buscarPorId(id);
-       return ResponseEntity.ok().body(autor);
+       return ResponseEntity.ok().body(new AutorDTO(autor));
    }
 
    @PostMapping
-   public ResponseEntity<Void> salvarAutor(@RequestBody Autor autor){
+   public ResponseEntity<Void> salvarAutor(@RequestBody AutorDTO autorDTO){
+       Autor autor = autorService.fromDTO(autorDTO);
        autorService.salvarAutor(autor);
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
        return ResponseEntity.created(uri).build();

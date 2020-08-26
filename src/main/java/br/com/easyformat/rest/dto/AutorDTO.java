@@ -10,11 +10,11 @@ public class AutorDTO {
     
     private String id;
     private String nome;
-    private String sobreNome;
+    private String sobrenome;
 
     public AutorDTO(Autor autor){
         this.id = autor.getId();
         this.nome = autor.getNome();
-        this.sobreNome = autor.getSobreNome();
+        this.sobrenome = autor.getSobrenome();
     }
 }

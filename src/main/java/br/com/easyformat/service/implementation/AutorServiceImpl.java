@@ -59,7 +59,7 @@ public class AutorServiceImpl implements AutorService {
 
     private void atualizaDados(Autor novoAutor, Autor autor){
         novoAutor.setNome(autor.getNome());
-        novoAutor.setSobreNome(autor.getSobreNome());
+        novoAutor.setSobrenome(autor.getSobrenome());
         novoAutor.setObras(autor.getObras());
     }
 

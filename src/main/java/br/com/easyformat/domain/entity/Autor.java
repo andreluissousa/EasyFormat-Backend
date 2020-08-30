@@ -19,7 +19,7 @@ public class Autor extends Pessoa{
     
     private String id;
    
-    private List<Obra> obras = new ArrayList<>();
+    private List<Obra> obras = new ArrayList<Obra>();
 
     public Autor(AutorDTO autorDTO){
         this.id = autorDTO.getId();

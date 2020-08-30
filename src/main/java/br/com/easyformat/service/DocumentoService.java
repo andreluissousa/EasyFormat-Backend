@@ -2,7 +2,7 @@ package br.com.easyformat.service;
 
 import java.util.List;
 import br.com.easyformat.domain.entity.Documento;
-
+import br.com.easyformat.rest.dto.DocumentoDTO;
 
 public interface DocumentoService {
     
@@ -10,5 +10,6 @@ public interface DocumentoService {
     List<Documento> buscarTodos();
     Documento buscarPorId(String id);
     void delete(String id);
+    Documento fromDTO(DocumentoDTO documentoDTO);
     Documento atualizar(Documento documento);
 }

@@ -16,7 +16,6 @@ public class CursoServiceImpl implements CursoService {
 
     private CursoRepository repository;
 
-
     @Override
     public Curso salvarCurso(Curso curso) {
         return repository.insert(curso);

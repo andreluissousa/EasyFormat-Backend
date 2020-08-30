@@ -26,7 +26,7 @@ public class Usuario extends Pessoa{
     private String senha;
 
     @DBRef(lazy = true)
-    private List<Documento> documentos = new ArrayList<>();
+    private List<Documento> documentos = new ArrayList<Documento>();
 
     public Usuario(UsuarioDTO usuarioDTO) {
         this.id = usuarioDTO.getId();

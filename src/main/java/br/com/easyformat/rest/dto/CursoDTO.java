@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class CursoDTO {
     
     private String id;
+    
     private String nome;
 
     public CursoDTO(Curso curso){

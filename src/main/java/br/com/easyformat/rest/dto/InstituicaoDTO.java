@@ -2,24 +2,26 @@ package br.com.easyformat.rest.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
 import br.com.easyformat.domain.entity.Curso;
 import br.com.easyformat.domain.entity.Instituicao;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import br.com.easyformat.validation.NotEmptyList;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Data
 public class InstituicaoDTO {
     
     private String id;
+    @NotEmpty(message = "{instituicao.nome}")
     private String nome;
+    @NotEmpty(message = "{instituicao.uf}")
     private String UF;
+    @NotEmpty(message = "{instituicao.cidade}")
     private String cidade;
-    private List<Curso> cursos = new ArrayList<>();
+    @NotEmptyList
+    private List<Curso> cursos = new ArrayList<Curso>();
 
     public InstituicaoDTO(Instituicao instituicao) {
         this.id = instituicao.getId();

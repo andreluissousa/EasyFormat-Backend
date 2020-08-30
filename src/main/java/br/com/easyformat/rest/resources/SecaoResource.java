@@ -2,6 +2,7 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.Secao;
+import br.com.easyformat.rest.dto.SecaoDTO;
 import br.com.easyformat.service.SecaoService;
 
 @RestController
@@ -36,7 +38,8 @@ public class SecaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarSecao (@RequestBody Secao secao){
+    public ResponseEntity<Void> salvarSecao (@RequestBody @Valid SecaoDTO secaoDTO){
+        Secao secao = secaoService.fromDTO(secaoDTO);
         secaoService.salvarSecao(secao);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(secao.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -49,7 +52,8 @@ public class SecaoResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody Secao secao, @PathVariable String id){
+    public ResponseEntity<Void> update(@RequestBody @Valid SecaoDTO secaoDTO, @PathVariable String id){
+        Secao secao = secaoService.fromDTO(secaoDTO);
         secao.setId(id);
         secaoService.update(secao);
         return ResponseEntity.noContent().build();

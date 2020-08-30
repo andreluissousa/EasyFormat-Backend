@@ -1,5 +1,6 @@
 package br.com.easyformat.rest.dto;
 
+import javax.validation.constraints.NotEmpty;
 import br.com.easyformat.domain.entity.Autor;
 import br.com.easyformat.domain.entity.Citacao;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ public class CitacaoDTO {
     
     private String id;
 
+    @NotEmpty(message = "citacao.texto")
     private String texto;
 
     private Autor autor;

@@ -2,6 +2,7 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.Obra;
+import br.com.easyformat.rest.dto.ObraDTO;
 import br.com.easyformat.service.ObraService;
 
 
@@ -31,13 +33,14 @@ public class ObraResource {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Obra> buscarPorId(@PathVariable String id){
+    public ResponseEntity<ObraDTO> buscarPorId(@PathVariable String id){
         Obra obra = obraService.buscarPorId(id);
-        return ResponseEntity.ok().body(obra);
+        return ResponseEntity.ok().body(new ObraDTO(obra));
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarObra(@RequestBody Obra obra){
+    public ResponseEntity<Void> salvarObra(@RequestBody @Valid ObraDTO obraDTO){
+        Obra obra = obraService.fromDTO(obraDTO);
         obraService.salvarObra(obra);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obra.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -50,7 +53,8 @@ public class ObraResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update (@RequestBody Obra obra, @PathVariable String id){
+    public ResponseEntity<Void> update (@RequestBody @Valid ObraDTO obraDTO, @PathVariable String id){
+        Obra obra = obraService.fromDTO(obraDTO);
         obra.setId(id);
         obraService.update(obra);
         return ResponseEntity.noContent().build();

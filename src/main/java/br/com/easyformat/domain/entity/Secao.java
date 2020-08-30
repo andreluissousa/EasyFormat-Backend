@@ -5,9 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.constraints.NotEmpty;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import br.com.easyformat.rest.dto.SecaoDTO;
@@ -20,7 +17,6 @@ public class Secao {
     @Id
     private String id;
 
-    @NotEmpty(message = "O titulo é obrigatório")
     private String titulo;
 
     private Integer ordem;
@@ -29,11 +25,11 @@ public class Secao {
 
     private String nomeImagem;
 
-    private List<Citacao> citacao = new ArrayList<>();
+    private List<Citacao> citacao = new ArrayList<Citacao>();
 
     private String diretorioImagem;
 
-    private List<SubSecao> subSecao = new ArrayList<>();
+    private List<SubSecao> subSecao = new ArrayList<SubSecao>();
 
     public Secao(String id, String titulo, Integer ordem, String conteudo) {
         this.id = id;

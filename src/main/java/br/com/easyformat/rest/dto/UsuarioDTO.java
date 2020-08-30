@@ -11,19 +11,19 @@ public class UsuarioDTO {
     
     private String id;
 
-    @NotEmpty(message = "O nome é obrigatório")
+    @NotEmpty(message = "{nome}")
     private String nome;
 
-    @NotEmpty(message = "O sobrenome é obrigatório")
+    @NotEmpty(message = "{sobrenome}")
     private String sobrenome;
 
-    @NotEmpty(message = "O email é obrigatório")
+    @NotEmpty(message = "{usuario.email}")
     private String email;
 
-    @NotEmpty(message = "A senha é obrigatória")
+    @NotEmpty(message = "{usuario.senha}")
     private String senha;
 
-    @NotEmpty(message = "Por favor, informe a sua formação")
+    @NotEmpty(message = "{usuario.fomacao}")
     private String formacao;
 
     public UsuarioDTO(Usuario usuario) {

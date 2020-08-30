@@ -2,6 +2,7 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class AutorResource {
    }
 
    @PostMapping
-   public ResponseEntity<Void> salvarAutor(@RequestBody AutorDTO autorDTO){
+   public ResponseEntity<Void> salvarAutor(@RequestBody @Valid AutorDTO autorDTO){
        Autor autor = autorService.fromDTO(autorDTO);
        autorService.salvarAutor(autor);
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
@@ -51,7 +52,8 @@ public class AutorResource {
    }
 
    @PutMapping("{id}")
-   public ResponseEntity<Void> update (@RequestBody Autor autor, @PathVariable String id){
+   public ResponseEntity<Void> update (@RequestBody @Valid AutorDTO autorDTO, @PathVariable String id){
+       Autor autor = autorService.fromDTO(autorDTO);
        autor.setId(id);
        autorService.update(autor);
        return ResponseEntity.noContent().build();

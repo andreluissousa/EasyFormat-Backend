@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.Capa;
+import br.com.easyformat.rest.dto.CapaDTO;
 import br.com.easyformat.service.CapaService;
 
 @RestController
@@ -31,13 +32,14 @@ public class CapaResource {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Capa> buscarPorId(@PathVariable String id){
+    public ResponseEntity<CapaDTO> buscarPorId(@PathVariable String id){
         Capa capa = capaService.buscarPorId(id);
-        return ResponseEntity.ok().body(capa);
+        return ResponseEntity.ok().body(new CapaDTO(capa));
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarCapa(@RequestBody @Valid Capa capa){
+    public ResponseEntity<Void> salvarCapa(@RequestBody @Valid CapaDTO capaDTO){
+        Capa capa = capaService.fromDTO(capaDTO);
         capaService.salvarCapa(capa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(capa.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -50,7 +52,8 @@ public class CapaResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update (@RequestBody Capa capa, @PathVariable String id){
+    public ResponseEntity<Void> update (@RequestBody @Valid CapaDTO capaDTO, @PathVariable String id){
+        Capa capa = capaService.fromDTO(capaDTO);
         capa.setId(id);
         capaService.update(capa);
         return ResponseEntity.noContent().build();

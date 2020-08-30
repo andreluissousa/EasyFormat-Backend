@@ -2,6 +2,7 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.SubSecao;
+import br.com.easyformat.rest.dto.SubSecaoDTO;
 import br.com.easyformat.service.SubSecaoService;
-
 
 @RestController
 @RequestMapping("/api/subSecao")
@@ -37,7 +38,8 @@ public class SubSecaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarSubSecao(@RequestBody SubSecao subSecao){
+    public ResponseEntity<Void> salvarSubSecao(@RequestBody @Valid SubSecaoDTO subSecaoDTO){
+        SubSecao subSecao = subSecaoService.fromDTO(subSecaoDTO);
         subSecaoService.salvarSubSecao(subSecao);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(subSecao.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -50,7 +52,8 @@ public class SubSecaoResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody SubSecao subSecao, @PathVariable String id){
+    public ResponseEntity<Void> update(@RequestBody @Valid SubSecaoDTO subSecaoDTO, @PathVariable String id){
+        SubSecao subSecao = subSecaoService.fromDTO(subSecaoDTO);
         subSecao.setId(id);
         subSecaoService.update(subSecao);
         return ResponseEntity.noContent().build();

@@ -25,8 +25,7 @@ public class InstituicaoServiceImpl implements InstituicaoService {
 
 
     @Override
-    public Instituicao salvarInstituicao(Instituicao instituicao) {
-       
+    public Instituicao salvarInstituicao(Instituicao instituicao) {       
         return repository.insert(instituicao);
     }
 

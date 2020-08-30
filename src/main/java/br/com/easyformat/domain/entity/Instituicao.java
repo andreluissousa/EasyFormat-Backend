@@ -25,7 +25,7 @@ public class Instituicao {
     private String cidade;
 
    
-    private List<Curso> cursos = new ArrayList<>();
+    private List<Curso> cursos = new ArrayList<Curso>();
 
     public Instituicao(String id, String nome, String uF, String cidade) {
         this.id = id;

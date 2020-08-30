@@ -3,6 +3,7 @@ package br.com.easyformat.rest.resources;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,9 +40,8 @@ public class InstituicaoResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarInstituicao(@RequestBody InstituicaoDTO instituicaoDTO){
-        Instituicao instituicao = instituicaoService.fromDTO(instituicaoDTO);
-        
+    public ResponseEntity<Void> salvarInstituicao(@RequestBody @Valid InstituicaoDTO instituicaoDTO){
+        Instituicao instituicao = instituicaoService.fromDTO(instituicaoDTO);        
         instituicao = instituicaoService.salvarInstituicao(instituicao);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(instituicao.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -54,7 +54,7 @@ public class InstituicaoResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody InstituicaoDTO instituicaoDTO, @PathVariable String id){
+    public ResponseEntity<Void> update(@RequestBody @Valid InstituicaoDTO instituicaoDTO, @PathVariable String id){
         Instituicao instituicao = instituicaoService.fromDTO(instituicaoDTO);
         instituicao.setId(id);
         instituicao = instituicaoService.update(instituicao);

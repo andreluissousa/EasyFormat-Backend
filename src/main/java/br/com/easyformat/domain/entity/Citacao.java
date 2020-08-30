@@ -1,6 +1,5 @@
 package br.com.easyformat.domain.entity;
 
-import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import br.com.easyformat.rest.dto.CitacaoDTO;
@@ -17,9 +16,7 @@ public class Citacao {
     @Id
     private String id;
 
-    @NotEmpty(message = "A citação deve conter algum texto")
-    private String texto;
-    
+    private String texto;    
 
     private Autor autor;
 

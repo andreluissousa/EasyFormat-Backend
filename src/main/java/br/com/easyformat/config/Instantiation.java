@@ -74,7 +74,7 @@ public class Instantiation implements CommandLineRunner{
 
         //Esta Classe é responsável por carregar o banco de dados, inserindo usuario, autores, documento e obras.
 
-        /*
+        
         
         Curso c1 = new Curso(null, "Análise e Desenvolvimento de Sistemas");
         Curso c2 = new Curso(null, "Banco de Dados");
@@ -94,7 +94,7 @@ public class Instantiation implements CommandLineRunner{
 
         Autor autor1 = new Autor();
         autor1.setNome("André Luiz");
-        autor1.setSobreNome("Sousa Borges");
+        autor1.setSobrenome("Sousa Borges");
         autor1.setFormacao("Técnico em Informática para Internet");
 
         Capa capa = new Capa(null, "Interfáce gráfica Easyformat", "Trabalho de Conclusão de curso da turma de Técnico em Informática para Internet");
@@ -103,12 +103,12 @@ public class Instantiation implements CommandLineRunner{
 
         Autor autor2 = new Autor();
         autor2.setNome("Eduardo");
-        autor2.setSobreNome("Nascimento");
+        autor2.setSobrenome("Nascimento");
         autor2.setFormacao("Técnico em Informática para Internet");
         
         Autor autor3 = new Autor();
         autor3.setNome("Jessen");
-        autor3.setSobreNome("K. S.");
+        autor3.setSobrenome("K. S.");
 
         autor3.getObras().addAll(Arrays.asList(obra1));
 
@@ -148,6 +148,7 @@ public class Instantiation implements CommandLineRunner{
 
         documentoRepository.saveAll(Arrays.asList(documento));
      
-        */       
+        
+        
     }
 }

@@ -2,9 +2,7 @@ package br.com.easyformat.rest.resources;
 
 import java.net.URI;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.easyformat.domain.entity.Citacao;
+import br.com.easyformat.rest.dto.CitacaoDTO;
 import br.com.easyformat.service.CitacaoService;
 
 @RestController
@@ -33,13 +32,14 @@ public class CitacaoResource {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Citacao> buscarPorId(@PathVariable String id){
+    public ResponseEntity<CitacaoDTO> buscarPorId(@PathVariable String id){
         Citacao citacao = citacaoService.buscarPorId(id);
-        return ResponseEntity.ok().body(citacao);
+        return ResponseEntity.ok().body(new CitacaoDTO(citacao));
     }
 
     @PostMapping
-    public ResponseEntity<Void> salvarCitacao(@RequestBody @Valid Citacao citacao){
+    public ResponseEntity<Void> salvarCitacao(@RequestBody @Valid CitacaoDTO citacaoDTO){
+        Citacao citacao = citacaoService.fromDTO(citacaoDTO);
         citacaoService.salvarCitacao(citacao);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/{id}").buildAndExpand(citacao.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -52,7 +52,8 @@ public class CitacaoResource {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody Citacao citacao, @PathVariable String id){
+    public ResponseEntity<Void> update(@RequestBody @Valid CitacaoDTO citacaoDTO, @PathVariable String id){
+        Citacao citacao = citacaoService.fromDTO(citacaoDTO);
         citacao.setId(id);
         citacaoService.update(citacao);
         return ResponseEntity.noContent().build();
